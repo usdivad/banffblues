@@ -1,0 +1,23 @@
+
+
+
+FEATURES NEEDed:
+- color following bar#
+- timbre.js playback (maybe just metro for now? but still try to encode in the chord)
+	- chords
+	- metronome counting in between
+- maybe make it more a composition indeed?
+
+
+TODO:
+- different keys
+- "suggested rhythmic groupings" clippy
+- allow change form
+
+
+
+
+elbuort laer ni uoy steg hcihw ,dne-tnorf eht htiw trats uoy tluser a sa dna ,draobward hguone ton ;dennalpnu oot neeb lla sah krow suoiverp ruoy
+
+
+)esac reppU( ecnaraeppA sv )esaCrewol( ycneiciffe fo rettam a si noitazilatipac
