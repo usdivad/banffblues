@@ -69,6 +69,8 @@ bluesChords.push(	[36, 40, 43, 47], //Cmaj7
 				);
 */
 
+
+//initial bar creations
 for (var i=0; i<bluesChords.length; i++) {
 	var b = new Bar();
 	b.chord = bluesChords[i];
@@ -79,10 +81,47 @@ for (var i=0; i<bluesChords.length; i++) {
 eng.barList = bars;
 
 
+//control stuff from index.html (IS MESSY! FIX!)
+var TWELVE = 12;
+var numInput = [];
+var denInput = [];
+
+//automate this....!
+/*var numInput = [];
+numInput.push(
+	$("#b1n").val(),
+	);
+*/
+
+//automated version! delirium gates
+for (var i=1;i<=TWELVE; i++) {
+	var numQuery = "#b" + i + "n";
+	var denQuery = "#b" + i + "d";
+	numInput.push($(numQuery).val());
+	denInput.push($(denQuery).val());
+	console.log(numQuery+", "+denQuery);
+}
 
 $("#playButton").click(function(){submit();});
-//control from index.html
+
+//Submit function
 function submit() {
 	var bpm = $("#bpm").val();
+	for (var i=0; i<TWELVE; i++)
+
+
+	//bar creation using params
+	for (var i=0; i<bluesChords.length; i++) {
+	var b = new Bar();
+	b.chord = bluesChords[i];
+	//console.log(bluesChords[i]);
+	bars.push(b);
+	}
+
+	eng.barList = bars;
+
+
+
+
 	console.log("sub");
 }
