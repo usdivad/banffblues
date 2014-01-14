@@ -29,6 +29,8 @@ TODO (ORG):
 
 - use php to generate the divs
 
+- css get .row properly working
+
 E_S_R(E) {
 	VERY(APE);
 }
