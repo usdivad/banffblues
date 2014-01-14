@@ -80,9 +80,9 @@ eng.barList = bars;
 
 
 
-
+$("#playButton").click(function(){submit();});
 //control from index.html
 function submit() {
 	var bpm = $("#bpm").val();
-
+	console.log("sub");
 }
