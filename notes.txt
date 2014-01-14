@@ -7,12 +7,13 @@ FEATURES NEEDed:
 	- chords
 	- metronome counting in between
 - maybe make it more a composition indeed?
-
+- bpm changer
 
 TODO (GEN):
 - different keys
 - "suggested rhythmic groupings" clippy
 - allow change form
+- diff timbres?
 
 TODO (SPEC):
 - playback.js: Engine.playChord(): make the noteOffs one by one, not just blanket all; and a more robust system so that it doesn't get cut off by the last timeout
@@ -28,3 +29,6 @@ elbuort laer ni uoy steg hcihw ,dne-tnorf eht htiw trats uoy tluser a sa dna ,dr
 )esac reppU( ecnaraeppA sv )esaCrewol( ycneiciffe fo rettam a si noitazilatipac
 
 http://en.wikipedia.org/wiki/Gordian_Knot	
+
+ADSR for piano:
+http://www.ece.nmsu.edu/~pdeleon/Research/Publications/ASEE_GSW_2000.pdf
