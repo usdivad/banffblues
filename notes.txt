@@ -15,7 +15,7 @@ TODO (GEN):
 - allow change form
 
 TODO (SPEC):
-- playback.js: make the noteOffs one by one, not just blanket all
+- playback.js: Engine.playChord(): make the noteOffs one by one, not just blanket all; and a more robust system so that it doesn't get cut off by the last timeout
 
 
 

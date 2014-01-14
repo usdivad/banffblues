@@ -11,17 +11,27 @@ dependencies:
 function Engine() {
 	var t = this;
 
+	//IVs for bars
+	t.barList = [];
+	t.barList.push(new Bar());
+
 	//IVs for synthesis
 	t.osc = T("tri");
 	t.env = T("adsr", {a:1, d:200, s:0.25, r:500});
 	t.oe = T("OscGen", {osc:t.osc, env:t.env, mul:1}).play();
 
+	//IVs for timing
+	t.bpm = 120; 
+	t.timer = T("interval", {interval:t.bpm}, function() {
+
+	});
+
 	//Plays a chord given as array of MIDI pitches
 	//(only one articulation so far)
-	t.playChord = function(noteArray) {
+	t.playChord = function(noteList) {
 		var velocity = 25;
-		for (var i=0; i<noteArray.length; i++) {
-			var note = noteArray[i];
+		for (var i=0; i<noteList.length; i++) {
+			var note = noteList[i];
 			t.oe.noteOn(note, velocity);
 			//get the ind noteOff to work
 			/*setTimeout(function(note) {
