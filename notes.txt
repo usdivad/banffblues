@@ -9,15 +9,22 @@ FEATURES NEEDed:
 - maybe make it more a composition indeed?
 
 
-TODO:
+TODO (GEN):
 - different keys
 - "suggested rhythmic groupings" clippy
 - allow change form
 
+TODO (SPEC):
+- playback.js: make the noteOffs one by one, not just blanket all
 
 
 
+E_S_R(E) {
+	VERY(APE);
+}
 elbuort laer ni uoy steg hcihw ,dne-tnorf eht htiw trats uoy tluser a sa dna ,draobward hguone ton ;dennalpnu oot neeb lla sah krow suoiverp ruoy
 
 
 )esac reppU( ecnaraeppA sv )esaCrewol( ycneiciffe fo rettam a si noitazilatipac
+
+http://en.wikipedia.org/wiki/Gordian_Knot	
