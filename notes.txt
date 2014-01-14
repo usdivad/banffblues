@@ -18,7 +18,10 @@ TODO (GEN):
 TODO (SPEC):
 - playback.js: Engine.playChord(): make the noteOffs one by one, not just blanket all; and a more robust system so that it doesn't get cut off by the last timeout
 
+- separate bar.js and playback.js
+	- in particular, playBeat() should go into playback
 
+- get rid of all the "t."s e.g. in playBeat()
 
 E_S_R(E) {
 	VERY(APE);

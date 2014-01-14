@@ -14,6 +14,8 @@ function Engine() {
 	//IVs for bars
 	t.barList = [];
 	t.barList.push(new Bar());
+		t.barList.push(new Bar());
+
 	t.currentBarIndex = 0;
 
 	//IVs for synthesis
@@ -23,28 +25,51 @@ function Engine() {
 	t.met = T("fnoise", {freq:512, mul:0}).play();
 
 	//IVs for timing
-	t.bpm = 120; 
-	t.timer = T("interval", {interval:t.bpm}, function() {
+	t.ms = 250; 
+	t.timer = T("interval", {interval:t.ms}, function() {
 
 		//playBeat() + det new bars
-		if (t.barList[currentBarIndex].done()) {
-			//check whether we have more bars
-			if (currentBarIndex <= t.barList.length) {
-				currentBarIndex++;
-				t.barList[currentBarIndex].playBeat(t);
+		//first check whether bar is done
+		if (t.barList[t.currentBarIndex].done() && t.currentBarIndex >= 0) {
+			//then check whether we have more bars
+			if (t.currentBarIndex < t.barList.length-1) {
+				console.log("add");
+				t.currentBarIndex++;
+				t.playBeat(t.barList[t.currentBarIndex]);
 			}
 			else {
-				currentBarIndex = -1;
-				//stopAll();
+				t.currentBarIndex = -1;
+				t.timer.stop();
+				console.log("stop!")
 			}
 		}
 		else {
-			t.barList[currentBarIndex].playBeat(t);
+			//console.log("poop");
+			t.playBeat(t.barList[t.currentBarIndex]);
 		}
 
 
 		//CSS work
+
+		console.log("x");
 	});
+
+	//What to do with each beat of the metro
+	t.playBeat = function(b) {
+		b.isPlaying = true;
+
+		if (b.currentBeat == 0) {
+			t.playChord(b.chord);
+			//muted because downbeat gets a little loud
+			//t.playMetro("downbeat");
+		}
+		else {
+			t.playMetro("upbeat");
+		}
+
+
+		b.currentBeat++;
+	}
 
 	//Plays a chord given as array of MIDI pitches (only one articulation so far)
 	t.playChord = function(noteList) {
@@ -78,6 +103,7 @@ function Engine() {
 		}, 100); //100ms
 
 	}
+
 }
 
 
