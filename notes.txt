@@ -27,7 +27,8 @@ TODO (ORG):
 
 - get rid of all the "t."s e.g. in playBeat()
 
-- use php to generate the divs
+- use php to generate the divs in chord chart
+	- tie it to the js objects!
 
 - css get .row properly working
 
