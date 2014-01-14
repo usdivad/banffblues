@@ -33,14 +33,24 @@ function Engine() {
 		if (t.barList[t.currentBarIndex].done() && t.currentBarIndex >= 0) {
 			//then check whether we have more bars
 			if (t.currentBarIndex < t.barList.length-1) {
-				console.log("add");
 				t.currentBarIndex++;
+				console.log("add to become "+t.currentBarIndex);
 				t.playBeat(t.barList[t.currentBarIndex]);
 			}
 			else {
+				//stop entirely
+				/*
 				t.currentBarIndex = -1;
 				t.timer.stop();
-				console.log("stop!")
+				console.log("stop!");
+				*/
+
+				//loop (but needs done reset)
+				/*
+				t.currentBarIndex = 0;
+				t.playBeat(t.barList[t.currentBarIndex]);
+				console.log("back to the beginning");
+				*/
 			}
 		}
 		else {
@@ -53,6 +63,16 @@ function Engine() {
 
 		console.log("x");
 	});
+
+	//Start the timer
+	t.start = function() {
+		t.timer.start();
+	}
+
+	//Stop the timer
+	t.stop = function() {
+		t.timer.stop();
+	}
 
 	//What to do with each beat of the metro
 	t.playBeat = function(b) {
@@ -111,4 +131,15 @@ function Engine() {
 function denToMs(den, bpm) {
 	var q_ms = (60/bpm)*1000;
 	return q_ms*(4/den);
+}
+
+//Midi Down Octave for Blossomer (http://usdivad.com/blossomer) output
+function mdo(notes) {
+	var list = notes.split("q");
+	list.pop();
+	var newList = list;
+	for (var i=0; i<list.length; i++) {
+		newList[i] = list[i] - 12;
+	}
+	return newList;
 }
