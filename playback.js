@@ -14,6 +14,7 @@ function Engine() {
 	//IVs for bars
 	t.barList = [];
 	t.barList.push(new Bar());
+	t.currentBar = barList[0];
 
 	//IVs for synthesis
 	t.osc = T("tri");
@@ -26,8 +27,7 @@ function Engine() {
 
 	});
 
-	//Plays a chord given as array of MIDI pitches
-	//(only one articulation so far)
+	//Plays a chord given as array of MIDI pitches (only one articulation so far)
 	t.playChord = function(noteList) {
 		var velocity = 25;
 		for (var i=0; i<noteList.length; i++) {
@@ -45,8 +45,7 @@ function Engine() {
 }
 
 
-//Denominator to milliseconds converter
-//e.g. denominator of 8 at 100 bpm is an interval of 300ms
+//Denominator to milliseconds converter (e.g. denominator of 8 at 100 bpm is an interval of 300ms)
 function denToMs(den, bpm) {
 	var q_ms = (60/bpm)*1000;
 	return q_ms*(4/den);
