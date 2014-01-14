@@ -1,0 +1,21 @@
+@font-face {
+	font-family: inkpen;
+	src: url(./lib/Inkpen2ChordsStd.otf);
+}
+
+html {
+	font-family: inkpen;
+	font-size: 200%;
+}
+
+.num, .den {
+	width: 35px;
+}
+
+.bar {
+	padding: 10px;
+	border: 2px;
+	border-style: solid;
+	border-color: black;
+	width: 100px;
+}

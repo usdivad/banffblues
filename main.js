@@ -4,6 +4,7 @@ var bars = [];
 //x.playChord([68,70,72,74,76,78]);
 
 var bluesChords = [];
+
 bluesChords.push(	[36, 40, 43, 47], //Cmaj7
 					[36, 40, 43, 47], //Cmaj7
 
@@ -41,11 +42,47 @@ bluesChords.push(	[36, 40, 43, 47], //Cmaj7
 					[43, 47, 50, 53] //G7
 				);
 
+/*
+bluesChords.push(	[36, 40, 43, 47], //Cmaj7
+
+					[40, 44, 47, 50], //E7
+
+					[38, 42, 45, 48], //D7
+
+					[36, 40, 43, 46], //C7
+
+					[41, 45, 48, 51], //F7
+
+					[46, 50, 53, 56], //Bb7
+
+					[45, 49, 52, 55], //A7
+
+					[44, 48, 51, 54], //Ab7
+
+					[38, 41, 45, 48], //Dm7
+
+					[43, 47, 50, 53], //G7
+
+					[45, 49, 52, 55], //A7
+
+					[43, 47, 50, 53] //G7
+				);
+*/
+
 for (var i=0; i<bluesChords.length; i++) {
 	var b = new Bar();
 	b.chord = bluesChords[i];
-	console.log(bluesChords[i]);
+	//console.log(bluesChords[i]);
 	bars.push(b);
 }
 
 eng.barList = bars;
+
+
+
+
+//control from index.html
+function submit() {
+	var bpm = $("#bpm").val();
+
+}

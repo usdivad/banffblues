@@ -9,21 +9,25 @@ FEATURES NEEDed:
 - maybe make it more a composition indeed?
 - bpm changer
 
-TODO (GEN):
+TODO (FEATURES):
 - different keys
 - "suggested rhythmic groupings" clippy
 	- e.g. right now for chords in between bars... can't
 - allow change form
 - diff timbres?
 - randomize octaves
+- make playback more dynamic
+	- e.g. live bpm button, that requires you checking it everytime the bpm is set etc.
 
-TODO (SPEC):
+TODO (ORG):
 - playback.js: Engine.playChord(): make the noteOffs one by one, not just blanket all; and a more robust system so that it doesn't get cut off by the last timeout
 
 - separate bar.js and playback.js
 	- in particular, playBeat() should go into playback
 
 - get rid of all the "t."s e.g. in playBeat()
+
+- use php to generate the divs
 
 E_S_R(E) {
 	VERY(APE);
