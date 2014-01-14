@@ -19,7 +19,7 @@ function Engine() {
 	t.currentBarIndex = 0;
 
 	//IVs for synthesis
-	t.osc = T("pulse");
+	t.osc = T("konami"); //or pulse an octave up?
 	t.env = T("adsr", {a:1, d:200, s:0.25, r:500});
 	t.oe = T("OscGen", {osc:t.osc, env:t.env, mul:1}).play();
 	t.met = T("fnoise", {freq:512, mul:0}).play();

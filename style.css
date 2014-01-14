@@ -8,6 +8,15 @@ html {
 	font-size: 30px;
 }
 
+#nm {
+	margin-top: -60px;
+	font-size: 80%;
+}
+
+#ej {
+	padding-left: 10px;
+}
+
 .num, .den {
 	width: 35px;
 }
