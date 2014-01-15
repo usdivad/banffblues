@@ -25,7 +25,8 @@ function Engine() {
 	t.met = T("fnoise", {freq:512, mul:0}).play();
 
 	//IVs for timing
-	t.ms = 250; 
+	t.bpm = 120;
+	t.ms = bpmToMs(t.bpm); 
 	t.timer = T("interval", {interval:t.ms}, function() {
 
 		//playBeat() + det new bars
@@ -78,10 +79,13 @@ function Engine() {
 	t.playBeat = function(b) {
 		b.isPlaying = true;
 
+		//playChord AND update timer interval
 		if (b.currentBeat == 0) {
 			t.playChord(b.chord);
 			//muted because downbeat gets a little loud
 			//t.playMetro("downbeat");
+			t.timer.interval.value = denToMs(b.den, t.bpm);
+			console.log(b.den+", "+t.bpm+" ->"+t.timer.interval.value);
 		}
 		else {
 			t.playMetro("upbeat");
@@ -131,6 +135,11 @@ function Engine() {
 function denToMs(den, bpm) {
 	var q_ms = (60/bpm)*1000;
 	return q_ms*(4/den);
+}
+
+//BPM to milliseconds converter
+function bpmToMs(bpm) {
+	return (60/bpm)*1000;
 }
 
 //Midi Down Octave for Blossomer (http://usdivad.com/blossomer) output

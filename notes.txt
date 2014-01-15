@@ -45,3 +45,7 @@ http://en.wikipedia.org/wiki/Bird_changes
 
 ADSR for piano:
 http://www.ece.nmsu.edu/~pdeleon/Research/Publications/ASEE_GSW_2000.pdf
+
+
+
+Engine should check each bar at beginning to set new timer interval. make sure no off-by-ones

@@ -1,8 +1,10 @@
+//Init engine and bar list
 var eng = new Engine();
 var bars = [];
 //b.playBeat(x);
 //x.playChord([68,70,72,74,76,78]);
 
+//Blues chords
 var bluesChords = [];
 
 bluesChords.push(	[36, 40, 43, 47], //Cmaj7
@@ -70,7 +72,8 @@ bluesChords.push(	[36, 40, 43, 47], //Cmaj7
 */
 
 
-//initial bar creations
+//initial bar creations (old)
+/*
 for (var i=0; i<bluesChords.length; i++) {
 	var b = new Bar();
 	b.chord = bluesChords[i];
@@ -79,10 +82,10 @@ for (var i=0; i<bluesChords.length; i++) {
 }
 
 eng.barList = bars;
+*/
 
-
-//control stuff from index.html (IS MESSY! FIX!)
-var TWELVE = 12;
+//Scraping input from index.html
+var TOTAL_BARS = 12; //cheating a little since there are actually twice as many (24) here
 var numInput = [];
 var denInput = [];
 
@@ -93,35 +96,45 @@ numInput.push(
 	);
 */
 
-//automated version! delirium gates
-for (var i=1;i<=TWELVE; i++) {
-	var numQuery = "#b" + i + "n";
-	var denQuery = "#b" + i + "d";
-	numInput.push($(numQuery).val());
-	denInput.push($(denQuery).val());
-	console.log(numQuery+", "+denQuery);
-}
-
+//Control for playButton (static for now)
 $("#playButton").click(function(){submit();});
 
 //Submit function
 function submit() {
-	var bpm = $("#bpm").val();
-	for (var i=0; i<TWELVE; i++)
+	
+	//automated version! delirium gatess
+	//prevent parallel arrays?
+	for (var i=1;i<=TOTAL_BARS; i++) {
+		//get input numerator/denominator
+		var numQuery = "#b" + i + "n";
+		var denQuery = "#b" + i + "d";
+		numInput.push($(numQuery).val());
+		denInput.push($(denQuery).val());
+		console.log(numQuery+", "+denQuery);
 
-
-	//bar creation using params
-	for (var i=0; i<bluesChords.length; i++) {
-	var b = new Bar();
-	b.chord = bluesChords[i];
-	//console.log(bluesChords[i]);
-	bars.push(b);
+		//use input with predet bluesChords to create bars
+		//only iterates for two chords, hence i+1
+		for (var j=i; j<i+1; j++) {
+			var b = new Bar();
+			b.chord = bluesChords[i];
+			b.num = numInput[i];
+			b.den = denInput[i];
+			//console.log(bluesChords[i]);
+			bars.push(b);
+		}
 	}
-
 	eng.barList = bars;
+	eng.bpm = parseInt($("#bpm").val());
 
-
-
+	//^^ put above all in submit()
 
 	console.log("sub");
 }
+
+
+//READY SET GO!
+$(document).ready(function() {
+	submit();
+	eng.start();
+})
+
