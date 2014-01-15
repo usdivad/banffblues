@@ -76,6 +76,7 @@ function Engine() {
 	}
 
 	//What to do with each beat of the metro
+	//b is a bar
 	t.playBeat = function(b) {
 		b.isPlaying = true;
 

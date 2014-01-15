@@ -104,7 +104,7 @@ function submit() {
 	
 	//automated version! delirium gatess
 	//prevent parallel arrays?
-	for (var i=1;i<=TOTAL_BARS; i++) {
+	for (var i=0;i<=TOTAL_BARS; i++) {
 		//get input numerator/denominator
 		var numQuery = "#b" + i + "n";
 		var denQuery = "#b" + i + "d";
@@ -117,8 +117,11 @@ function submit() {
 		for (var j=i; j<i+1; j++) {
 			var b = new Bar();
 			b.chord = bluesChords[i];
-			b.num = numInput[i];
-			b.den = denInput[i];
+
+			/*** trouble is here ***/
+			b.num = parseInt(numInput[i]);
+			b.den = parseInt(denInput[i]);
+
 			//console.log(bluesChords[i]);
 			bars.push(b);
 		}

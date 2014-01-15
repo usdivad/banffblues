@@ -17,7 +17,25 @@
 				<br>
 
 
+				<?php
+					$numList = array(5,1,7,3,1,7,6,5,1,3,2,5);
+					$denList = array(16,2,16,8,16,4,8,16,2,4,16,2);
+					$number_rows = 3;
+					$number_bars = 12;
 
+					//create rows
+					for ($i=0; $i<$number_rows; $i++) {
+						echo '<div id="row'.$i.'" class="row">'
+						//create bar divs
+						for ($j=$i; $j<number_bars; $j++) {
+							echo '<div id="bar'.$j.'" class="bar">';
+							echo '<input type="number" id="b'.$j.'n" class="num" value="'.$numList[$j].'">';
+							echo '<input type="number" id="b'.$j.'d" class="den" value="'.$denList[$j].'">';
+						} //end bar creation
+						echo '</div>';
+					} //end row creation
+ 
+				?>
 				<!--first four bars-->
 				<div id="row1" class="row">
 					<div id="bar1" class="bar">

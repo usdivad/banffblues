@@ -30,7 +30,13 @@ TODO (ORG):
 - use php to generate the divs in chord chart
 	- tie it to the js objects!
 
-- css get .row properly working
+- css styling
+	- get .row properly working
+	- get rid of <br>s etc.
+
+- bugchecking? e.g. the parseInts
+
+
 
 E_S_R(E) {
 	VERY(APE);
