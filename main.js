@@ -3,6 +3,7 @@ var eng = new Engine();
 var bars = [];
 //b.playBeat(x);
 //x.playChord([68,70,72,74,76,78]);
+var playingAtm = false; //y/n
 
 //Blues chords
 var bluesChords = [];

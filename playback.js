@@ -37,7 +37,12 @@ function Engine() {
 			if (t.currentBarIndex < t.barList.length-1) {
 				t.currentBarIndex++;
 				console.log("add to become "+t.currentBarIndex);
-				t.playBeat(t.barList[t.currentBarIndex]);
+				var b = t.barList[t.currentBarIndex];
+
+				t.timer.interval.value = denToMs(b.den, t.bpm); //needs to go before
+				console.log(b.den+", "+t.bpm+" ->"+t.timer.interval.value);
+
+				t.playBeat(b);
 			}
 			else {
 				//stop entirely
@@ -80,11 +85,11 @@ function Engine() {
 
 		//playChord AND update timer interval
 		if (b.currentBeat == 0) {
-			t.timer.interval.value = denToMs(b.den, t.bpm); //needs to go before
+
+
 			t.playChord(b.chord);
 			//muted because downbeat gets a little loud
 			//t.playMetro("downbeat");
-			console.log(b.den+", "+t.bpm+" ->"+t.timer.interval.value);
 		}
 		else {
 			t.playMetro("upbeat");
