@@ -1,3 +1,5 @@
+//$(document).ready(function (){
+
 //Init engine and bar list
 var eng = new Engine();
 var bars = [];
@@ -102,46 +104,70 @@ $("#playButton").click(function(){submit();});
 
 //Submit function
 function submit() {
-	
-	//automated version! delirium gatess
-	//prevent parallel arrays?
-	var twentyFour = 0;
-	for (var i=0;i<TOTAL_BARS; i++) {
-		//get input numerator/denominator
-		var numQuery = "#b" + i + "n";
-		var denQuery = "#b" + i + "d";
-		numInput.push($(numQuery).val());
-		denInput.push($(denQuery).val());
-		console.log(numQuery+", "+denQuery);
 
-		//use input with predet bluesChords to create bars
-		//only iterates for two chords, hence i+1
-		for (var j=i; j<=i+1; j++) {
-			var b = new Bar();
-			b.chord = bluesChords[i];
+	//play/pause visual and control
 
-			/*** trouble is here ***/
-			b.num = parseInt(numInput[i]);
-			b.den = parseInt(denInput[i]);
+	//pause it
+	if (playingAtm) {
+		playingAtm = false;
+		$("#playButton").html("PLAY");	
 
-			//console.log(bluesChords[i]);
-			bars.push(b);
-			//twentyFour++;
-		}
+		//CTRL
+		eng.stop();
+		eng.currentBarIndex = 0;
 	}
-	console.log(twentyFour);
-	eng.barList = bars;
-	eng.bpm = parseInt($("#bpm").val());
+	//play it
+	else {
+		playingAtm = true;
+		$("#playButton").html("PAUSE");
 
-	//^^ put above all in submit()
+		//CTRL
+		//automated version! delirium gatess
+		//prevent parallel arrays?
+		var twentyFour = 0;
+		for (var i=0;i<TOTAL_BARS; i++) {
+			//get input numerator/denominator
+			var numQuery = "#b" + i + "n";
+			var denQuery = "#b" + i + "d";
+			numInput.push($(numQuery).val());
+			denInput.push($(denQuery).val());
+			console.log(numQuery+", "+denQuery);
+
+			//use input with predet bluesChords to create bars
+			//only iterates for two chords, hence i+1
+			for (var j=i; j<=i+1; j++) {
+				var b = new Bar();
+				b.chord = bluesChords[i];
+
+				/*** trouble is here ***/
+				b.num = parseInt(numInput[i]);
+				b.den = parseInt(denInput[i]);
+
+				//console.log(bluesChords[i]);
+				bars.push(b);
+				//twentyFour++;
+			}
+		}
+		console.log(twentyFour);
+		eng.barList = bars;
+		eng.bpm = parseInt($("#bpm").val());
+		eng.start();
+
+	}
 
 	console.log("sub");
 }
 
 
+//}); //end document ready
+
+
 //READY SET GO!
-$(document).ready(function() {
-	submit();
-	eng.start();
-})
+/*$(document).ready(function() {
+	//submit();
+	//eng.start();
+});
+*/
+
+
 
