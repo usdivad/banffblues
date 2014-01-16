@@ -8,12 +8,27 @@ html {
 	font-size: 30px;
 }
 
+input {
+	font-family: inkpen;
+	font-size: 28px;
+	border-style: none;
+	width: 60px;
+	text-align: center;
+}
+
+a, a:visited {
+	color: black;
+}
+
+a:hover {
+	color: gray;
+}
+
 #header {
 	margin: auto;
 	text-align: center;
 	padding-bottom: 50px;
 }
-
 
 #nm {
 	margin-top: -60px;
@@ -29,6 +44,7 @@ html {
 	max-width: 725px;
 	min-height: 100px;
 	margin: auto;
+	padding-bottom: 50px;
 }
 
 #meta {
@@ -43,6 +59,11 @@ html {
 	border-style: solid;
 	border-width: 2px;
 	padding-bottom: 12.5px;
+	margin-top: 10px;
+}
+
+#playButton:hover {
+	color: gray;
 }
 
 #playButton:active {
@@ -50,14 +71,14 @@ html {
 }
 
 .num, .den {
-	width: 35px;
+	width: 42px;
 }
 
 .row {
 	width: 775px;
 	height: 100px;
 	float:none;
-	padding-top: 10px;
+	padding-bottom: 28px;
 }	
 
 .bar {
@@ -73,5 +94,6 @@ html {
 	width: 150px;
 	float:left;
 	margin-right: -2px;
+	/*vertical-align: text-top;*/
 }
 

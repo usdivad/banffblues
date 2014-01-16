@@ -26,8 +26,9 @@ function Engine() {
 
 	//IVs for timing
 	t.bpm = 120;
-	t.ms = bpmToMs(t.bpm); 
-	t.timer = T("interval", {interval:t.ms}, function() {
+	//t.ms = bpmToMs(t.bpm); 
+	t.denMs = denToMs(t.bpm);
+	t.timer = T("interval", {interval:t.denMs}, function() {
 
 		//playBeat() + det new bars
 		//first check whether bar is done
@@ -40,18 +41,14 @@ function Engine() {
 			}
 			else {
 				//stop entirely
-				/*
-				t.currentBarIndex = -1;
-				t.timer.stop();
-				console.log("stop!");
-				*/
+				/*t.stop();*/
 
 				//loop (but needs done reset)
-				/*
+				
 				t.currentBarIndex = 0;
 				t.playBeat(t.barList[t.currentBarIndex]);
 				console.log("back to the beginning");
-				*/
+				
 			}
 		}
 		else {
@@ -73,6 +70,7 @@ function Engine() {
 	//Stop the timer
 	t.stop = function() {
 		t.timer.stop();
+		console.log("stop!");
 	}
 
 	//What to do with each beat of the metro
@@ -82,10 +80,10 @@ function Engine() {
 
 		//playChord AND update timer interval
 		if (b.currentBeat == 0) {
+			t.timer.interval.value = denToMs(b.den, t.bpm); //needs to go before
 			t.playChord(b.chord);
 			//muted because downbeat gets a little loud
 			//t.playMetro("downbeat");
-			t.timer.interval.value = denToMs(b.den, t.bpm);
 			console.log(b.den+", "+t.bpm+" ->"+t.timer.interval.value);
 		}
 		else {

@@ -104,7 +104,8 @@ function submit() {
 	
 	//automated version! delirium gatess
 	//prevent parallel arrays?
-	for (var i=0;i<=TOTAL_BARS; i++) {
+	var twentyFour = 0;
+	for (var i=0;i<TOTAL_BARS; i++) {
 		//get input numerator/denominator
 		var numQuery = "#b" + i + "n";
 		var denQuery = "#b" + i + "d";
@@ -114,7 +115,7 @@ function submit() {
 
 		//use input with predet bluesChords to create bars
 		//only iterates for two chords, hence i+1
-		for (var j=i; j<i+1; j++) {
+		for (var j=i; j<=i+1; j++) {
 			var b = new Bar();
 			b.chord = bluesChords[i];
 
@@ -124,8 +125,10 @@ function submit() {
 
 			//console.log(bluesChords[i]);
 			bars.push(b);
+			//twentyFour++;
 		}
 	}
+	console.log(twentyFour);
 	eng.barList = bars;
 	eng.bpm = parseInt($("#bpm").val());
 

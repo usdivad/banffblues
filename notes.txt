@@ -36,6 +36,7 @@ TODO (ORG):
 
 - bugchecking? e.g. the parseInts
 
+- Engine should check each bar at beginning to set new timer interval. make sure no off-by-ones
 
 
 E_S_R(E) {
@@ -54,4 +55,5 @@ http://www.ece.nmsu.edu/~pdeleon/Research/Publications/ASEE_GSW_2000.pdf
 
 
 
-Engine should check each bar at beginning to set new timer interval. make sure no off-by-ones
+
+oh the php doesn't work because it's local!! see the dial02 doesn't either!

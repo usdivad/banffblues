@@ -15,6 +15,7 @@ function Bar() {
 			return false;
 		}
 		else {
+			b.currentBeat = 0; //reset!
 			return true;
 		}
 	}
