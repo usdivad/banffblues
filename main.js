@@ -106,15 +106,17 @@ numInput.push(
 */
 
 //Control for playButton (static for now)
-$("#playButton").click(function(){submit();});
+$("#playButton").click(k);
 
 //Submit function
 function submit() {
+	console.log("submit()");
 
 	//play/pause visual and control
 
 	//pause it
 	if (playingAtm) {
+		console.log("playingAtm");
 		playingAtm = false;
 		$("#playButton").html("PLAY");	
 
@@ -135,12 +137,13 @@ function submit() {
 	}
 	//play it
 	else {
+		console.log("yo lay");
 		playingAtm = true;
 		$("#playButton").html("STOP");
 
 		//touch event trigger
-		eng.oe = T("OscGen", {osc:eng.osc, env:eng.env, mul:1}).play();
-		eng.met = T("fnoise", {freq:512, mul:0}).play();
+		//eng.oe = T("OscGen", {osc:eng.osc, env:eng.env, mul:1}).play();
+		//eng.met = T("fnoise", {freq:512, mul:0}).play();
 
 		//CTRL
 		//automated version! delirium gatess
@@ -188,9 +191,40 @@ function submit() {
 		eng.bpm = parseInt($("#bpm").val());
 		eng.start();
 		$("#bpm").prop("readonly", true);
+
 	}
 
 	console.log("sub");
+}
+
+function k() {
+	var formants = {
+        a:[700, 1200, 2900],
+        i:[300, 2700, 2700],
+        u:[390, 1200, 2500],
+        e:[450, 1750, 2750],
+        o:[460,  880, 2800]
+      }, freq, synth, f1, f2, f3;
+
+      freq = 174.61412048339844;
+      freq = T("+.kr", freq, T("sin.kr", {freq:3, mul:0.8}));
+
+      synth = T("saw", {freq:freq});
+
+      f1 = T("bpf", {freq:T("param", {value: 700}), Q:9}, synth);
+      f2 = T("bpf", {freq:T("param", {value:1200}), Q:9}, synth);
+      f3 = T("bpf", {freq:T("param", {value:2900}), Q:9}, synth);
+      synth = T("+", f1, f2, f3);
+      synth = T("bpf", {freq:3200, Q:0.5}, synth);
+
+      T("interval", {interval:250}, function() {
+        var f = formants["aiueo"[(Math.random()*5)|0]];
+        f1.freq.linTo(f[0], 150);
+        f2.freq.linTo(f[1], 150);
+        f3.freq.linTo(f[2], 150);
+      }).set({buddies:synth}).start();
+
+      console.log("asdf");
 }
 
 //Control for timer (for the bar highlighting via)
@@ -241,12 +275,11 @@ function beep(setting) {
 }
 
 
-//}); //end document ready
 
 
 
 //unmuting for ios
-window.addEventListener('touchstart', function() {
+/*window.addEventListener('touchstart', function() {
 
 	// create empty buffer
 	var buffer = myContext.createBuffer(1, 1, 22050);
@@ -260,6 +293,9 @@ window.addEventListener('touchstart', function() {
 	source.noteOn(0);
 
 }, false);
+*/
+
+//}); //end document ready
 
 
 //READY SET GO!
