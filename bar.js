@@ -14,8 +14,8 @@ function Bar() {
 			return false;
 		}
 		else {
-			b.currentBeat = 0; //reset!
-			b.isPlaying = false;
+			//b.currentBeat = 0; //reset!
+			//b.isPlaying = false;
 			return true;
 		}
 	}

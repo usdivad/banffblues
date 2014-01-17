@@ -155,7 +155,7 @@ function submit() {
 				//console.log(bluesChords[i]);
 				bars.push(b);
 				twentyFour++;
-				console.log(j);
+				//console.log(j);
 			}
 		}
 		console.log(twentyFour);
