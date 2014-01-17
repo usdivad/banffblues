@@ -28,7 +28,45 @@ function Engine() {
 	t.bpm = 120;
 	//t.ms = bpmToMs(t.bpm); 
 	t.denMs = denToMs(t.bpm);
-	t.timer = T("interval", {interval:t.denMs}, t.intervalFunction);
+	t.timer = T("interval", {interval:t.denMs}, function() {
+
+		//playBeat() + det new bars
+		//first check whether bar is done
+		if (t.barList[t.currentBarIndex].done() && t.currentBarIndex >= 0) {
+			//then check whether we have more bars
+			if (t.currentBarIndex < t.barList.length-1) {
+				t.currentBarIndex++;
+				console.log("add to become "+t.currentBarIndex);
+				var b = t.barList[t.currentBarIndex];
+
+				//t.timer.interval.value = denToMs(b.den, t.bpm); //needs to go before
+				//console.log(b.den+", "+t.bpm+" ->"+t.timer.interval.value);
+
+				t.playBeat(b);
+			}
+			else {
+				//stop entirely
+				/*t.stop();*/
+
+				//loop (but needs done reset)
+				
+				t.currentBarIndex = 0;
+				t.playBeat(t.barList[t.currentBarIndex]);
+				console.log("back to the beginning");
+				
+			}
+		}
+		else {
+			//console.log("poop");
+			t.playBeat(t.barList[t.currentBarIndex]);
+		}
+
+
+		//CSS work
+
+		console.log()
+		console.log("x");
+	});
 
 	//Function for timer
 	t.intervalFunction = function() {
@@ -89,8 +127,10 @@ function Engine() {
 
 		//playChord AND update timer interval
 		if (b.currentBeat == 0) {
+			t.timer.stop();
 			t.denMs = denToMs(b.den, t.bpm);
-			//t.timer.interval.value = denToMs(b.den, t.bpm); //needs to go before
+			t.timer.interval.value = t.denMs;
+			t.timer.start();
 			//t.timer = new T("interval", {interval:t.denMs}, t.intervalFunction);
 			console.log(b.den+", "+t.bpm+" ->"+t.timer.interval.value);
 
