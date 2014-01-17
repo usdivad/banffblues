@@ -1,12 +1,6 @@
 /*
-dependencies:
-- timbre.js
-*/
-
-
-
-/*
 	Audio engine
+	- Dependencies: timbre.js
 */
 function Engine() {
 	var t = this;

@@ -1,3 +1,6 @@
+/*
+	BAR BAR BAR
+*/
 function Bar() {
 	var b = this;
 	b.chord = [46,49,53,56]; //"Bb7"

@@ -168,6 +168,17 @@ function submit() {
 	console.log("sub");
 }
 
+//Control for timer (for the bar highlighting via)
+eng.timer.on("bang", function(e){
+	console.log("bb");
+});
+eng.timer.on("bang", function(){
+	console.log("bb");
+});
+
+
+
+
 
 //}); //end document ready
 
