@@ -13,8 +13,8 @@ function Engine() {
 
 	//IVs for bars
 	t.barList = [];
-	t.barList.push(new Bar());
-		t.barList.push(new Bar());
+	/*t.barList.push(new Bar());
+		t.barList.push(new Bar());*/
 
 	t.currentBarIndex = 0;
 
@@ -28,7 +28,10 @@ function Engine() {
 	t.bpm = 120;
 	//t.ms = bpmToMs(t.bpm); 
 	t.denMs = denToMs(t.bpm);
-	t.timer = T("interval", {interval:t.denMs}, function() {
+	t.timer = T("interval", {interval:t.denMs}, t.intervalFunction);
+
+	//Function for timer
+	t.intervalFunction = function() {
 
 		//playBeat() + det new bars
 		//first check whether bar is done
@@ -66,7 +69,7 @@ function Engine() {
 
 		console.log()
 		console.log("x");
-	});
+	}
 
 	//Start the timer
 	t.start = function() {
@@ -86,8 +89,9 @@ function Engine() {
 
 		//playChord AND update timer interval
 		if (b.currentBeat == 0) {
-
-			t.timer.interval.value = denToMs(b.den, t.bpm); //needs to go before
+			t.denMs = denToMs(b.den, t.bpm);
+			//t.timer.interval.value = denToMs(b.den, t.bpm); //needs to go before
+			//t.timer = new T("interval", {interval:t.denMs}, t.intervalFunction);
 			console.log(b.den+", "+t.bpm+" ->"+t.timer.interval.value);
 
 			t.playChord(b.chord);
@@ -97,7 +101,6 @@ function Engine() {
 		else {
 			t.playMetro("upbeat");
 		}
-
 
 		b.currentBeat++;
 	}
