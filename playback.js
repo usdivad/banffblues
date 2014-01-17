@@ -46,6 +46,7 @@ function Engine() {
 				//console.log(b.den+", "+t.bpm+" ->"+t.timer.interval.value);
 
 				t.playBeat(b);
+
 				if (t.intervalNeedsReset) {
 					t.intervalNeedsReset = false;
 				}
@@ -78,46 +79,6 @@ function Engine() {
 		console.log("x");
 	});
 
-	//Function for timer
-	t.intervalFunction = function() {
-
-		//playBeat() + det new bars
-		//first check whether bar is done
-		if (t.barList[t.currentBarIndex].done() && t.currentBarIndex >= 0) {
-			//then check whether we have more bars
-			if (t.currentBarIndex < t.barList.length-1) {
-				t.currentBarIndex++;
-				console.log("add to become "+t.currentBarIndex);
-				var b = t.barList[t.currentBarIndex];
-
-				//t.timer.interval.value = denToMs(b.den, t.bpm); //needs to go before
-				//console.log(b.den+", "+t.bpm+" ->"+t.timer.interval.value);
-
-				t.playBeat(b);
-			}
-			else {
-				//stop entirely
-				/*t.stop();*/
-
-				//loop (but needs done reset)
-				
-				t.currentBarIndex = 0;
-				t.playBeat(t.barList[t.currentBarIndex]);
-				console.log("back to the beginning");
-				
-			}
-		}
-		else {
-			//console.log("poop");
-			t.playBeat(t.barList[t.currentBarIndex]);
-		}
-
-
-		//CSS work
-
-		console.log()
-		console.log("x");
-	}
 
 	//Start the timer
 	t.start = function() {
@@ -153,7 +114,7 @@ function Engine() {
 		else {
 			t.playMetro("upbeat");
 		}
-
+		//console.log(b.currentBeat);
 		b.currentBeat++;
 	}
 
