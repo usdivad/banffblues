@@ -42,6 +42,11 @@ TODO (ORG):
 
 1/17
 playback.js: highlight() and the double-trigger check should be ported to main.js
+mobile sound...
+
+ask moho about timbre.js:
+	- x.on()
+	- why no sound on ios?
 
 1/16
 certain indexes are out of sync; esp when you pause and then replay	
