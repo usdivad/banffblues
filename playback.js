@@ -17,6 +17,7 @@ function Engine() {
 	t.env = T("adsr", {a:1, d:200, s:0.25, r:500});
 	t.oe = T("OscGen", {osc:t.osc, env:t.env, mul:1}).play();
 	t.met = T("fnoise", {freq:512, mul:0}).play();
+	t.chordsSame = false;
 
 	//IVs for timing
 	t.bpm = 120;
@@ -58,8 +59,6 @@ function Engine() {
 				}*/
 
 				
-
-				
 				t.currentBarIndex = 0;
 				t.intervalNeedsReset = true;
 				//t.playBeat(t.barList[t.currentBarIndex]);
@@ -80,15 +79,34 @@ function Engine() {
 			if (b.currentBeat == 0) {
 				t.intervalNeedsReset = true;
 				
-				//viz for the prev bar off
+				//viz for the prev bar off + chord check
 				if (t.currentBarIndex == 0) {
+					//viz
 					var tail = t.barList.length-1;
 					highlight(tail, "off");
 				}
 				else {
+
+					//check if we're double-triggering a chord
+					var currentChord = b.chord;
+					var prevChord = t.barList[t.currentBarIndex-1].chord;
+
+					if (currentChord.length != prevChord.length) {
+						t.chordsSame = false;
+					}
+					else {
+						for (var i=0; i<currentChord.length && !t.chordsSame; i++) {
+							if (currentChord[i] == prevChord[i]) {
+								t.chordsSame = true;
+							}
+						}
+					}
+				}
+					//viz
 					highlight(t.currentBarIndex-1, "off");
 				}
-			}
+
+
 			t.playBeat(b);
 
 			//viz
@@ -122,20 +140,29 @@ function Engine() {
 	t.playBeat = function(b) {
 		//b.isPlaying = true;
 
-		//playChord AND update timer interval
+		//playChord AND update timer interval (should separate)
 		if (b.currentBeat == 0 && t.intervalNeedsReset) {
+
+			//update timer interval
 			t.timer.stop();
 			t.denMs = denToMs(b.den, t.bpm);
 			t.timer.interval.value = t.denMs;
 			t.timer.start();
 			//t.timer = new T("interval", {interval:t.denMs}, t.intervalFunction);
 			console.log("den"+b.den+", bpm"+t.bpm+" -> interval"+t.timer.interval.value);
+			t.intervalNeedsReset = false;
 
-			t.playChord(b.chord);
+			//play chord (but not if same)
+			if (t.chordsSame) {
+				t.playMetro("downbeat");
+				t.chordsSame = false; //reset
+			}
+			else {
+				t.playChord(b.chord);
+			}
 			//muted because downbeat gets a little loud
 			//t.playMetro("downbeat");
 
-			t.intervalNeedsReset = false;
 		}
 		else {
 			t.playMetro("upbeat");
