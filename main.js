@@ -143,9 +143,10 @@ function submit() {
 
 			//use input with predet bluesChords to create bars
 			//only iterates for two chords, hence i+1
-			for (var j=i; j<=i+1; j++) {
+			//j determines chord, i determines rhythm (byproduct of the bar glue cheating)
+			for (var j=2*i; j<=(2*i)+1; j++) { //proper incrementation; j starts on 2i
 				var b = new Bar();
-				b.chord = bluesChords[i];
+				b.chord = bluesChords[j];
 
 				/*** trouble is here ***/
 				b.num = parseInt(numInput[i]);
@@ -153,7 +154,8 @@ function submit() {
 
 				//console.log(bluesChords[i]);
 				bars.push(b);
-				//twentyFour++;
+				twentyFour++;
+				console.log(j);
 			}
 		}
 		console.log(twentyFour);
