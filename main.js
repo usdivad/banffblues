@@ -89,6 +89,12 @@ eng.barList = bars;
 
 //Scraping input from index.html
 var TOTAL_BARS = 12; //cheating a little since there are actually twice as many (24) here; offset by trueIndex in highlight()
+
+//divs
+var numDivs = [];
+var denDivs = [];
+
+//actual values
 var numInput = [];
 var denInput = [];
 
@@ -116,6 +122,16 @@ function submit() {
 		eng.stop();
 		eng.currentBarIndex = 0;
 		eng.barList[eng.currentBarIndex].currentBeat = 0;
+
+		//unlocking divs (recycled from the play code)
+		for (var i=0;i<TOTAL_BARS; i++) {
+			//get input numerator/denominator
+			var numQuery = "#b" + i + "n";
+			var denQuery = "#b" + i + "d";
+			$(numQuery).prop("readonly", false);
+			$(denQuery).prop("readonly", false);
+		}
+		$("#bpm").prop("readonly", false);
 	}
 	//play it
 	else {
@@ -157,18 +173,24 @@ function submit() {
 				twentyFour++;
 				//console.log(j);
 			}
-		}
+
+			//viz
+			$(numQuery).prop("readonly", true);
+			$(denQuery).prop("readonly", true);
+		} //end forloop
+
 		console.log(twentyFour);
 		eng.barList = bars;
 		eng.bpm = parseInt($("#bpm").val());
 		eng.start();
-
+		$("#bpm").prop("readonly", true);
 	}
 
 	console.log("sub");
 }
 
 //Control for timer (for the bar highlighting via)
+//not working
 eng.timer.on("bang", function(e){
 	console.log("bb");
 });
@@ -183,7 +205,7 @@ eng.timer.on("bang", function(){
 function highlight(barIndex, setting) {
 	//var trueIndex = barIndex%TOTAL_BARS;
 	var trueIndex = Math.floor(barIndex/2);
-	console.log("bar = " + barIndex+ "TRUTH = " + trueIndex);
+	//console.log("bar = " + barIndex+ "TRUTH = " + trueIndex);
 	var divBar = "#bar"+trueIndex;
 	if (setting==="on") {
 		$(divBar).css("background-color", "rgb(218,0,0)");
@@ -191,15 +213,17 @@ function highlight(barIndex, setting) {
 	else if (setting==="off") {
 		$(divBar).css("background-color", "rgb(250,250,250)");
 	}
-	console.log(divBar);
+	//console.log(divBar);
 }
 
 //Beeps the metronome
 function beep(setting) {
+
+	//downbeat setting not working?
 	if (setting === "downbeat") {
+		$("#metro").css("background-color", "#0EE000");
 		$("#metro").css("opacity", "1");
-		$("#metro").css("background-color", "#000000");
-		console.log("downbeat");
+		//console.log("downbeat");
 	}
 	else {
 		if (setting === "upbeat") {
@@ -208,7 +232,7 @@ function beep(setting) {
 		if (setting === "off") {
 			$("#metro").css("opacity", "0");
 		}
-		$("#metro").css("background-color", "#8EE000");
+		$("#metro").css("background-color", "#00BEDD");
 	}	
 }
 

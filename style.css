@@ -18,10 +18,12 @@ input {
 
 a, a:visited {
 	color: black;
+	text-decoration: none;
 }
 
 a:hover {
 	color: gray;
+	text-decoration: none;
 }
 
 #header {
@@ -107,7 +109,7 @@ a:hover {
 	background-color: #8EE000;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	opacity: 0.75;
+	opacity: 0;
 }
 
 #metro:active {
