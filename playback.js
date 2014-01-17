@@ -35,7 +35,7 @@ function Engine() {
 
 		//playBeat() + det new bars
 		//first check whether bar is done
-		if (t.barList[t.currentBarIndex].done() && t.currentBarIndex >= 0) {
+		if (b.done()) {
 
 			//then check whether we have more bars
 			if (t.currentBarIndex < t.barList.length-1) {
@@ -45,17 +45,21 @@ function Engine() {
 				//t.timer.interval.value = denToMs(b.den, t.bpm); //needs to go before
 				//console.log(b.den+", "+t.bpm+" ->"+t.timer.interval.value);
 
-				t.playBeat(b);
+				t.playBeat(b); //current bar
 
 				if (t.intervalNeedsReset) {
 					t.intervalNeedsReset = false;
 				}
 			}
-			else {
+			else { //no more bars = no more tears
 				//stop entirely
 				/*t.stop();*/
 
 				//loop (but needs done reset)
+
+				/*for (var r=0; r<barList.length; r++) {
+					t.barList[r].currentBeat = 0;
+				}*/
 				
 				t.currentBarIndex = 0;
 				t.intervalNeedsReset = true;
@@ -63,6 +67,9 @@ function Engine() {
 				console.log("back to the beginning");
 				
 			}
+
+			b.currentBeat = 0; //reset!
+			console.log("zero");
 		}
 		else { //if the bar's not done
 			//console.log("poop");
@@ -94,7 +101,7 @@ function Engine() {
 	//What to do with each beat of the metro
 	//b is a bar
 	t.playBeat = function(b) {
-		b.isPlaying = true;
+		//b.isPlaying = true;
 
 		//playChord AND update timer interval
 		if (b.currentBeat == 0 && t.intervalNeedsReset) {
@@ -114,7 +121,7 @@ function Engine() {
 		else {
 			t.playMetro("upbeat");
 		}
-		//console.log(b.currentBeat);
+		console.log(b.currentBeat);
 		b.currentBeat++;
 	}
 
