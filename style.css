@@ -97,3 +97,19 @@ a:hover {
 	/*vertical-align: text-top;*/
 }
 
+#chords {
+	padding-top: 15px;
+}
+
+#metro {
+	max-width: 725px;
+	height: 15px;
+	background-color: #8EE000;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	opacity: 0.75;
+}
+
+#metro:active {
+
+}

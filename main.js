@@ -177,6 +177,8 @@ eng.timer.on("bang", function(){
 });
 
 
+//VIZ FUNCTIONS
+
 //Highlights the current bar (as given by barIndex)
 function highlight(barIndex, setting) {
 	//var trueIndex = barIndex%TOTAL_BARS;
@@ -192,6 +194,23 @@ function highlight(barIndex, setting) {
 	console.log(divBar);
 }
 
+//Beeps the metronome
+function beep(setting) {
+	if (setting === "downbeat") {
+		$("#metro").css("opacity", "1");
+		$("#metro").css("background-color", "#000000");
+		console.log("downbeat");
+	}
+	else {
+		if (setting === "upbeat") {
+			$("#metro").css("opacity", "1");
+		}
+		if (setting === "off") {
+			$("#metro").css("opacity", "0");
+		}
+		$("#metro").css("background-color", "#8EE000");
+	}	
+}
 
 
 //}); //end document ready

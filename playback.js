@@ -24,6 +24,7 @@ function Engine() {
 	//t.ms = bpmToMs(t.bpm); 
 	t.denMs = denToMs(t.bpm);
 	t.intervalNeedsReset = true;
+	t.timeoutVal = 100; //100ms
 	t.timer = T("interval", {interval:t.denMs}, function() {
 
 		var b = t.barList[t.currentBarIndex];
@@ -141,7 +142,7 @@ function Engine() {
 		//b.isPlaying = true;
 
 		//playChord AND update timer interval (should separate)
-		if (b.currentBeat == 0 && t.intervalNeedsReset) {
+		if (b.currentBeat == 0 && t.intervalNeedsReset) { //downbeat
 
 			//update timer interval
 			t.timer.stop();
@@ -163,9 +164,15 @@ function Engine() {
 			//muted because downbeat gets a little loud
 			//t.playMetro("downbeat");
 
+			//viz
+			beep("downbeat");
+
 		}
-		else {
+		else { //upbeat
 			t.playMetro("upbeat");
+
+			//viz
+			beep("upbeat");
 		}
 		console.log(b.currentBeat);
 		b.currentBeat++;
@@ -185,6 +192,11 @@ function Engine() {
 		setTimeout(function() {
 			t.oe.allNoteOff();
 		}, 1000); //1000ms
+
+		setTimeout(function() {
+			//viz
+			beep("off");
+		}, t.timeoutVal);
 	}
 
 	//Plays metronome beats
@@ -200,7 +212,10 @@ function Engine() {
 
 		setTimeout(function() {
 			t.met.mul = 0;
-		}, 100); //100ms
+
+			//viz
+			beep("off");
+		}, t.timeoutVal); //100ms
 
 	}
 
