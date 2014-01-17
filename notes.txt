@@ -40,7 +40,6 @@ TODO (ORG):
 
 - Engine should check each bar at beginning to set new timer interval. make sure no off-by-ones
 
-css("background-color", "rgb(218,0,0)")
 
 1/16
 certain indexes are out of sync; esp when you pause and then replay	

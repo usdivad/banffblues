@@ -88,7 +88,7 @@ eng.barList = bars;
 */
 
 //Scraping input from index.html
-var TOTAL_BARS = 12; //cheating a little since there are actually twice as many (24) here
+var TOTAL_BARS = 12; //cheating a little since there are actually twice as many (24) here; offset by the % in highlight()
 var numInput = [];
 var denInput = [];
 
@@ -177,6 +177,12 @@ eng.timer.on("bang", function(){
 });
 
 
+//Highlights the current bar (as given by barIndex)
+function highlight(barIndex) {
+	var trueIndex = barIndex%TOTAL_BARS;
+	var divBar = "#bar"+trueIndex;
+	$(divBar).css("background-color", "rgb(218,0,0)");
+}
 
 
 
