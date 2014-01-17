@@ -185,7 +185,7 @@ function highlight(barIndex, setting) {
 		$(divBar).css("background-color", "rgb(218,0,0)");
 	}
 	else if (setting==="off") {
-		$(divBar).css("background-color", "rgb(0,0,0)");
+		$(divBar).css("background-color", "rgb(250,0,0)");
 	}
 }
 

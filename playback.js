@@ -31,6 +31,9 @@ function Engine() {
 		//first check whether bar is done
 		if (b.done()) {
 
+			//viz comes before here
+			highlight(t.currentBarIndex, "off");
+
 			//then check whether we have more bars
 			if (t.currentBarIndex < t.barList.length-1) {
 				t.currentBarIndex++;
@@ -44,6 +47,7 @@ function Engine() {
 				if (t.intervalNeedsReset) {
 					t.intervalNeedsReset = false;
 				}
+
 			}
 			else { //no more bars = no more tears
 				//stop entirely
@@ -62,8 +66,11 @@ function Engine() {
 				
 			}
 
+			//reset comes after
 			b.currentBeat = 0; //reset!
 			console.log("zero");
+
+
 		}
 		else { //if the bar's not done
 			//console.log("poop");
@@ -71,6 +78,9 @@ function Engine() {
 				t.intervalNeedsReset = true;
 			}
 			t.playBeat(b);
+
+			//viz
+			highlight(t.currentBarIndex, "on");
 		}
 
 

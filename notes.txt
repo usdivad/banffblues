@@ -65,4 +65,4 @@ also branching...
 
 oh the php doesn't work because it's local!! see the dial02 doesn't either!
 
-THIS IS HIGHLIGHT
+first and last ones are always the tricksies: initiation and resetation
