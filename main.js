@@ -178,10 +178,15 @@ eng.timer.on("bang", function(){
 
 
 //Highlights the current bar (as given by barIndex)
-function highlight(barIndex) {
+function highlight(barIndex, setting) {
 	var trueIndex = barIndex%TOTAL_BARS;
 	var divBar = "#bar"+trueIndex;
-	$(divBar).css("background-color", "rgb(218,0,0)");
+	if (setting==="on") {
+		$(divBar).css("background-color", "rgb(218,0,0)");
+	}
+	else if (setting==="off") {
+		$(divBar).css("background-color", "rgb(0,0,0)");
+	}
 }
 
 
