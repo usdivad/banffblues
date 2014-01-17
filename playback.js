@@ -22,7 +22,7 @@ function Engine() {
 	//IVs for timing
 	t.bpm = 120;
 	//t.ms = bpmToMs(t.bpm); 
-	t.denMs = denToMs(t.bpm);
+	t.denMs = denToMs(16, t.bpm);
 	t.intervalNeedsReset = true;
 	t.timeoutVal = 100; //100ms
 	t.timer = T("interval", {interval:t.denMs}, function() {
@@ -140,7 +140,7 @@ function Engine() {
 	//b is a bar
 	t.playBeat = function(b) {
 		//b.isPlaying = true;
-
+		console.log("playBeat");
 		//playChord AND update timer interval (should separate)
 		if (b.currentBeat == 0 && t.intervalNeedsReset) { //downbeat
 
@@ -180,6 +180,7 @@ function Engine() {
 
 	//Plays a chord given as array of MIDI pitches (only one articulation so far)
 	t.playChord = function(noteList) {
+		console.log("playChord");
 		var velocity = 25;
 		for (var i=0; i<noteList.length; i++) {
 			var note = noteList[i];
@@ -201,6 +202,7 @@ function Engine() {
 
 	//Plays metronome beats
 	t.playMetro = function(beat) {
+		console.log("playMetro");
 		if (beat === "downbeat") {
 			t.met.freq = 3000; //in hz
 		}

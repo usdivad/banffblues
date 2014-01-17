@@ -138,6 +138,10 @@ function submit() {
 		playingAtm = true;
 		$("#playButton").html("STOP");
 
+		//touch event trigger
+		eng.oe = T("OscGen", {osc:eng.osc, env:eng.env, mul:1}).play();
+		eng.met = T("fnoise", {freq:512, mul:0}).play();
+
 		//CTRL
 		//automated version! delirium gatess
 		//prevent parallel arrays?
