@@ -28,21 +28,27 @@ function Engine() {
 	t.bpm = 120;
 	//t.ms = bpmToMs(t.bpm); 
 	t.denMs = denToMs(t.bpm);
+	t.intervalNeedsReset = true;
 	t.timer = T("interval", {interval:t.denMs}, function() {
+
+		var b = t.barList[t.currentBarIndex];
 
 		//playBeat() + det new bars
 		//first check whether bar is done
 		if (t.barList[t.currentBarIndex].done() && t.currentBarIndex >= 0) {
+
 			//then check whether we have more bars
 			if (t.currentBarIndex < t.barList.length-1) {
 				t.currentBarIndex++;
 				console.log("add to become "+t.currentBarIndex);
-				var b = t.barList[t.currentBarIndex];
 
 				//t.timer.interval.value = denToMs(b.den, t.bpm); //needs to go before
 				//console.log(b.den+", "+t.bpm+" ->"+t.timer.interval.value);
 
 				t.playBeat(b);
+				if (t.intervalNeedsReset) {
+					t.intervalNeedsReset = false;
+				}
 			}
 			else {
 				//stop entirely
@@ -51,14 +57,18 @@ function Engine() {
 				//loop (but needs done reset)
 				
 				t.currentBarIndex = 0;
+				t.intervalNeedsReset = true;
 				t.playBeat(t.barList[t.currentBarIndex]);
 				console.log("back to the beginning");
 				
 			}
 		}
-		else {
+		else { //if the bar's not done
 			//console.log("poop");
-			t.playBeat(t.barList[t.currentBarIndex]);
+			if (b.currentBeat == 0) {
+				t.intervalNeedsReset = true;
+			}
+			t.playBeat(b);
 		}
 
 
@@ -126,17 +136,19 @@ function Engine() {
 		b.isPlaying = true;
 
 		//playChord AND update timer interval
-		if (b.currentBeat == 0) {
+		if (b.currentBeat == 0 && t.intervalNeedsReset) {
 			t.timer.stop();
 			t.denMs = denToMs(b.den, t.bpm);
 			t.timer.interval.value = t.denMs;
 			t.timer.start();
 			//t.timer = new T("interval", {interval:t.denMs}, t.intervalFunction);
-			console.log(b.den+", "+t.bpm+" ->"+t.timer.interval.value);
+			console.log("den"+b.den+", bpm"+t.bpm+" -> interval"+t.timer.interval.value);
 
 			t.playChord(b.chord);
 			//muted because downbeat gets a little loud
 			//t.playMetro("downbeat");
+
+			t.intervalNeedsReset = false;
 		}
 		else {
 			t.playMetro("upbeat");
