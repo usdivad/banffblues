@@ -66,3 +66,8 @@ also branching...
 oh the php doesn't work because it's local!! see the dial02 doesn't either!
 
 first and last ones are always the tricksies: initiation and resetation
+
+viz metro
+last bar is missing a beat
+prevent double-triggering
+realtime editing of the timesig params

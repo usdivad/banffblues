@@ -28,11 +28,8 @@ function Engine() {
 		var b = t.barList[t.currentBarIndex];
 
 		//playBeat() + det new bars
-		//first check whether bar is done
+		//first check whether bar is done. if it is done:
 		if (b.done()) {
-
-			//viz comes before here
-			highlight(t.currentBarIndex, "off");
 
 			//then check whether we have more bars
 			if (t.currentBarIndex < t.barList.length-1) {
@@ -42,11 +39,12 @@ function Engine() {
 				//t.timer.interval.value = denToMs(b.den, t.bpm); //needs to go before
 				//console.log(b.den+", "+t.bpm+" ->"+t.timer.interval.value);
 
-				t.playBeat(b); //current bar
-
 				if (t.intervalNeedsReset) {
 					t.intervalNeedsReset = false;
 				}
+
+				//viz (1 beat early)
+				//highlight(t.currentBarIndex, "on");
 
 			}
 			else { //no more bars = no more tears
@@ -58,13 +56,18 @@ function Engine() {
 				/*for (var r=0; r<barList.length; r++) {
 					t.barList[r].currentBeat = 0;
 				}*/
+
+				
+
 				
 				t.currentBarIndex = 0;
 				t.intervalNeedsReset = true;
-				t.playBeat(t.barList[t.currentBarIndex]);
+				//t.playBeat(t.barList[t.currentBarIndex]);
 				console.log("back to the beginning");
 				
 			}
+
+			t.playBeat(b); //current bar, not the next one
 
 			//reset comes after
 			b.currentBeat = 0; //reset!
@@ -76,6 +79,15 @@ function Engine() {
 			//console.log("poop");
 			if (b.currentBeat == 0) {
 				t.intervalNeedsReset = true;
+				
+				//viz for the prev bar off
+				if (t.currentBarIndex == 0) {
+					var tail = t.barList.length-1;
+					highlight(tail, "off");
+				}
+				else {
+					highlight(t.currentBarIndex-1, "off");
+				}
 			}
 			t.playBeat(b);
 
@@ -100,6 +112,9 @@ function Engine() {
 	t.stop = function() {
 		t.timer.stop();
 		console.log("stop!");
+		
+		//viz
+		highlight(t.currentBarIndex, "off");
 	}
 
 	//What to do with each beat of the metro
