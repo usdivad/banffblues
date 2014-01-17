@@ -22,7 +22,7 @@ a, a:visited {
 }
 
 a:hover {
-	color: gray;
+	color: #A30000;
 	text-decoration: none;
 }
 
@@ -65,12 +65,8 @@ a:hover {
 	margin-top: 10px;
 }
 
-#playButton:hover {
-	color: gray;
-}
-
-#playButton:active {
-	background-color: gray;
+#playButton:hover, #playButton:active {
+	color: #A30000;
 }
 
 .num, .den {
