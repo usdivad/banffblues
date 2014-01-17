@@ -11,11 +11,11 @@ function Bar() {
 	//Checks whether bar is done playing through all its beats (as indicated by num)
 	b.done = function() {
 		if (b.currentBeat < b.num) {
-			b.isPlaying = false;
 			return false;
 		}
 		else {
 			b.currentBeat = 0; //reset!
+			b.isPlaying = false;
 			return true;
 		}
 	}

@@ -115,16 +115,24 @@ function submit() {
 		//CTRL
 		eng.stop();
 		eng.currentBarIndex = 0;
+		eng.barList[eng.currentBarIndex].currentBeat = 0;
 	}
 	//play it
 	else {
 		playingAtm = true;
-		$("#playButton").html("PAUSE");
+		$("#playButton").html("STOP");
 
 		//CTRL
 		//automated version! delirium gatess
 		//prevent parallel arrays?
 		var twentyFour = 0;
+
+		//reinstatiate/set
+		numInput = [];
+		denInput = [];
+		bars = [];
+
+
 		for (var i=0;i<TOTAL_BARS; i++) {
 			//get input numerator/denominator
 			var numQuery = "#b" + i + "n";
