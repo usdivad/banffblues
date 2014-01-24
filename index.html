@@ -12,11 +12,14 @@
 	</head>
 	<body>
 	<div id="content">
-		<!--<div id="applyNow">Apply now!</div>-->
-
 		<div id="sheet">
 			<div id="meta">
-				Quarter note = <input type="number" id="bpm" value="132"> BPM
+				<!--<div id="applyNow">Apply now!</div>-->
+				<div id="instructions">
+					Customize the tempo and time signature values or
+					<span id="randomizeButton" class="button">Randomize!</span>
+				</div>
+				<div id="tempoMarking">Quarter note = <input type="number" id="bpm" value="132"> BPM</div>
 			</div>
 
 			<div id="metro"></div>
@@ -94,7 +97,7 @@
 				</div>		
 			</div> <!--end chords-->
 		</div> <!--end sheet-->	
-		<div id="playButton">PLAY</div>
+		<div id="playButton" class="button">PLAY</div>
 	</div> <!--end content-->
 
 		<script type="text/javascript" src="./lib/jquery-1.10.2.min.js"></script>

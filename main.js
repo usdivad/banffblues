@@ -105,10 +105,16 @@ numInput.push(
 	);
 */
 
-//Control for playButton (static for now)
+//Controls
+//for playButton (static for now)
 $("#playButton").click(function() {
 	submit();
 });
+
+//for randomize button
+$("#randomizeButton").click(function() {
+	randomizeBars();
+})
 
 //Submit function
 function submit() {
@@ -246,6 +252,20 @@ function beep(setting) {
 	}	
 }
 
+
+function randomizeBars() {
+	for (var i=0;i<TOTAL_BARS; i++) {
+			var numVal = Math.floor(Math.random()*10)+1; //1 to 10
+			var denVal = (Math.floor(Math.random()*4)+1)*4; //4 to 32
+			//get input numerator/denominator
+			var numQuery = "#b" + i + "n";
+			var denQuery = "#b" + i + "d";
+			$(numQuery).val(numVal);
+			$(denQuery).val(denVal);
+			console.log(numQuery+", "+denQuery);
+
+		} //end forloop
+}
 
 
 
