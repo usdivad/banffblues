@@ -13,10 +13,13 @@ function Engine() {
 	t.currentBarIndex = 0;
 
 	//IVs for synthesis
+	/*
 	t.osc = T("konami"); //or pulse an octave up?
 	t.env = T("adsr", {a:1, d:200, s:0.25, r:500});
 	t.oe = T("OscGen", {osc:t.osc, env:t.env, mul:1}).play();
 	t.met = T("fnoise", {freq:512, mul:0}).play();
+	*/
+	t.osc, t.env, t.oe, t.met;
 	t.chordsSame = false;
 
 	//IVs for timing
@@ -26,6 +29,14 @@ function Engine() {
 	t.intervalNeedsReset = true;
 	t.timeoutVal = 100; //100ms
 	t.timer = T("interval", {interval:t.denMs}, function() {
+
+		//Creation: synth
+		if (typeof t.oe == "undefined") {
+			t.osc = T("konami"); //or pulse an octave up?
+			t.env = T("adsr", {a:1, d:200, s:0.25, r:500});
+			t.oe = T("OscGen", {osc:t.osc, env:t.env, mul:1}).play();
+			t.met = T("fnoise", {freq:512, mul:0}).play();
+		}
 
 		var b = t.barList[t.currentBarIndex];
 
@@ -139,6 +150,7 @@ function Engine() {
 	//What to do with each beat of the metro
 	//b is a bar
 	t.playBeat = function(b) {
+
 		//b.isPlaying = true;
 		console.log("playBeat");
 		//playChord AND update timer interval (should separate)

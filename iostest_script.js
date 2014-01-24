@@ -1,6 +1,20 @@
 //document.getElementById("khom").click(k);
 $("#khom").click(j);
 
+
+//i() doesn't work because of global var declaration
+var osc_ne = T("konami");
+var env_ne = T("adsr", {a:10, d:300, s:0.25, r:700});
+var oe_ne = T("OscGen", {osc:osc_nw, env:env_nw, mul:1}).play();
+function i() {
+  var noteNum = 80;
+  var velocity = 100;
+
+  oe_nw.noteOn(noteNum, velocity);
+  console.log("i");
+}
+
+//j DOES work
 function j() {
   var osc_nw = T("konami");
   var env_nw = T("adsr", {a:10, d:300, s:0.25, r:700});
