@@ -60,6 +60,12 @@ a:hover {
 	padding-bottom: 20px;
 }
 
+#sheet {
+	margin: auto;
+	border-style: dotted;
+	border-width: 2px;
+}
+
 #playButton {
 	width: 100px;
 	height: 30px;
@@ -93,9 +99,11 @@ a:hover {
 	padding-bottom: 28px;
 }	
 
+/*try using margins (centering) instead of hacky padding*/
 .bar {
-	padding-left: 20px;
-	padding-right: 10px;
+	margin: auto;
+	padding-left: 14px;
+	padding-right: 14px;
 	/*margin-top: 20px;*/
 	border-left: 2px;
 	border-right: 2px;

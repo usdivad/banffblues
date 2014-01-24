@@ -28,6 +28,8 @@ function Engine() {
 	t.denMs = denToMs(16, t.bpm);
 	t.intervalNeedsReset = true;
 	t.timeoutVal = 100; //100ms
+	t.beatCount = 0;
+
 	t.timer = T("interval", {interval:t.denMs}, function() {
 
 		//Creation: synth
@@ -107,9 +109,10 @@ function Engine() {
 						t.chordsSame = false;
 					}
 					else {
-						for (var i=0; i<currentChord.length && !t.chordsSame; i++) {
-							if (currentChord[i] == prevChord[i]) {
-								t.chordsSame = true;
+						t.chordsSame = true;
+						for (var i=0; i<currentChord.length; i++) {
+							if (currentChord[i] != prevChord[i]) {
+								t.chordsSame = false;
 							}
 						}
 					}
@@ -135,6 +138,7 @@ function Engine() {
 
 	//Start the timer
 	t.start = function() {
+		t.beatCount = 0;
 		t.timer.start();
 	}
 
@@ -154,40 +158,47 @@ function Engine() {
 		//b.isPlaying = true;
 		console.log("playBeat");
 		//playChord AND update timer interval (should separate)
-		if (b.currentBeat == 0 && t.intervalNeedsReset) { //downbeat
+		if (b.currentBeat == 0) { //downbeat
 
-			//update timer interval
-			t.timer.stop();
-			t.denMs = denToMs(b.den, t.bpm);
-			t.timer.interval.value = t.denMs;
-			t.timer.start();
-			//t.timer = new T("interval", {interval:t.denMs}, t.intervalFunction);
-			console.log("den"+b.den+", bpm"+t.bpm+" -> interval"+t.timer.interval.value);
-			t.intervalNeedsReset = false;
-
-			//play chord (but not if same)
-			if (t.chordsSame) {
-				t.playMetro("downbeat");
-				t.chordsSame = false; //reset
-			}
-			else {
-				t.playChord(b.chord);
-			}
-			//muted because downbeat gets a little loud
-			//t.playMetro("downbeat");
-
-			//viz
+			//viz?
 			beep("downbeat");
+
+			if (t.intervalNeedsReset) {
+				//update timer interval
+				t.timer.stop();
+				t.denMs = denToMs(b.den, t.bpm);
+				t.timer.interval.value = t.denMs;
+				t.timer.start();
+				//t.timer = new T("interval", {interval:t.denMs}, t.intervalFunction);
+				console.log("den"+b.den+", bpm"+t.bpm+" -> interval"+t.timer.interval.value);
+				t.intervalNeedsReset = false;
+
+				//play chord (but not if same)
+				if (t.chordsSame) {
+					t.playMetro("downbeat");
+					t.chordsSame = false; //reset
+				}
+				else {
+					t.playChord(b.chord);
+				}
+				//muted because downbeat gets a little loud
+				//t.playMetro("downbeat");
+			}
 
 		}
 		else { //upbeat
-			t.playMetro("upbeat");
 
-			//viz
-			beep("upbeat");
+			//Currently set to "1 at the end", so e.g. 7 becomes 2+2+2+1 rather than 1+2+2+2
+			if (b.currentBeat%2 != 0) {
+				t.playMetro("upbeat");
+
+				//viz
+				beep("upbeat");
+			}
 		}
 		console.log(b.currentBeat);
 		b.currentBeat++;
+		//t.beatCount++;
 	}
 
 	//Plays a chord given as array of MIDI pitches (only one articulation so far)
