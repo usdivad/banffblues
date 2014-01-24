@@ -80,3 +80,8 @@ realtime editing of the timesig params
 
 
 it's a bunch of asynchronous calls going on as opposed to funciton passion (thus not so many returnes)
+
+
+get used to fb og:links and desc and IMAGE thumbs for all yr pages
+streamline these processes
+is the F/Fm catching the difference?
