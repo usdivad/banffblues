@@ -254,7 +254,7 @@ function beep(setting) {
 
 //Randomizes bars
 function randomizeBars() {
-	$("#bpm").val(Math.floor(Math.random()*80)+80); //80 to 160
+	$("#bpm").val(Math.floor(Math.random()*100)+80); //80 to 180
 	for (var i=0;i<TOTAL_BARS; i++) {
 			var numVal = Math.floor(Math.random()*10)+1; //1 to 10
 			var denVal = (Math.floor(Math.random()*4)+1)*4; //4 to 32
