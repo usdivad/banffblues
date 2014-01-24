@@ -43,7 +43,7 @@ a:hover {
 
 #content {
 	min-width: 10px;
-	max-width: 725px;
+	max-width: 725px; /*this magic number is bad*/
 	min-height: 100px;
 	margin: auto;
 	padding-bottom: 50px;
@@ -51,6 +51,8 @@ a:hover {
 }
 
 #meta {
+	margin-top: 20px;
+	margin-bottom: -20px;
 	text-align: center;
 }
 
@@ -61,9 +63,17 @@ a:hover {
 }
 
 #sheet {
+	max-width: 1000px;
 	margin: auto;
+	/*
 	border-style: dotted;
 	border-width: 2px;
+	*/
+	border-top-style: dotted;
+	border-top-width: 3px;
+	border-bottom-style: dotted;
+	border-bottom-width: 3px;
+	margin-bottom: 20px;	
 }
 
 #playButton {
