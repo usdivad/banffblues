@@ -106,15 +106,19 @@ numInput.push(
 */
 
 //Control for playButton (static for now)
-$("#playButton").click(function(){submit();});
+$("#playButton").click(function() {
+	submit();
+});
 
 //Submit function
 function submit() {
+	console.log("submit()");
 
 	//play/pause visual and control
 
 	//pause it
 	if (playingAtm) {
+		console.log("playingAtm");
 		playingAtm = false;
 		$("#playButton").html("PLAY");	
 
@@ -135,8 +139,13 @@ function submit() {
 	}
 	//play it
 	else {
+		console.log("yo lay");
 		playingAtm = true;
 		$("#playButton").html("STOP");
+
+		//touch event trigger
+		//eng.oe = T("OscGen", {osc:eng.osc, env:eng.env, mul:1}).play();
+		//eng.met = T("fnoise", {freq:512, mul:0}).play();
 
 		//CTRL
 		//automated version! delirium gatess
@@ -184,6 +193,7 @@ function submit() {
 		eng.bpm = parseInt($("#bpm").val());
 		eng.start();
 		$("#bpm").prop("readonly", true);
+
 	}
 
 	console.log("sub");
@@ -237,12 +247,11 @@ function beep(setting) {
 }
 
 
-//}); //end document ready
 
 
 
 //unmuting for ios
-window.addEventListener('touchstart', function() {
+/*window.addEventListener('touchstart', function() {
 
 	// create empty buffer
 	var buffer = myContext.createBuffer(1, 1, 22050);
@@ -256,6 +265,9 @@ window.addEventListener('touchstart', function() {
 	source.noteOn(0);
 
 }, false);
+*/
+
+//}); //end document ready
 
 
 //READY SET GO!
