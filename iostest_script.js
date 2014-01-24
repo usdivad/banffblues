@@ -4,12 +4,13 @@ $("#khom").click(j);
 function j() {
   var osc_nw = T("konami");
   var env_nw = T("adsr", {a:10, d:300, s:0.25, r:700});
-  var oe_nw = T("OscGen", {osc:osc_nw, env:env_nw, mul:0.4}).play();
+  var oe_nw = T("OscGen", {osc:osc_nw, env:env_nw, mul:1}).play();
 
-  var noteNum = 2000;
+  var noteNum = 80;
   var velocity = 100;
 
   oe_nw.noteOn(noteNum, velocity);
+  console.log("j");
 
 }
 
