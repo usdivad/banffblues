@@ -252,8 +252,9 @@ function beep(setting) {
 	}	
 }
 
-
+//Randomizes bars
 function randomizeBars() {
+	$("#bpm").val(Math.floor(Math.random()*80)+80); //80 to 160
 	for (var i=0;i<TOTAL_BARS; i++) {
 			var numVal = Math.floor(Math.random()*10)+1; //1 to 10
 			var denVal = (Math.floor(Math.random()*4)+1)*4; //4 to 32
@@ -262,7 +263,7 @@ function randomizeBars() {
 			var denQuery = "#b" + i + "d";
 			$(numQuery).val(numVal);
 			$(denQuery).val(denVal);
-			console.log(numQuery+", "+denQuery);
+			console.log(numVal+", "+denVal);
 
 		} //end forloop
 }
